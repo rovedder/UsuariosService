@@ -1,54 +1,27 @@
 package br.ufsm.usuarios.form;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
-import br.com.caelum.stella.bean.validation.CPF;
 import br.ufsm.usuarios.model.Usuario;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class UsuarioForm {
 	
-	@NotNull @NotEmpty
+	@NotBlank
 	private String nome;
 
-	@NotNull @NotEmpty @CPF
-	private String cpf;
-	
-	@NotNull @NotEmpty
+	@NotBlank @Email
 	private String email;
 	
-	@NotNull @NotEmpty
+	@NotBlank
 	private String senha;
 	
 	public Usuario converter(String senha) {
-		return new Usuario(this.nome, this.cpf, this.email, senha);
+		return new Usuario(this.nome, this.email, senha);
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSenha() {
-		return this.senha;
-	}
 }

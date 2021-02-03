@@ -10,15 +10,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 
 @Entity
 @Table(name = "usuarios")
+@NoArgsConstructor
+@Getter
+@Setter
 public class Usuario implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
@@ -27,52 +33,16 @@ public class Usuario implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	private String cpf;
 	private String email;
 	private String senha;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Perfil> perfis = new ArrayList<>();
-
-	@OneToMany
-	private List<Endereco> endereco;
 	
-	public Usuario() {
-	}
-
-	public Usuario(String nome, String cpf, String email, String senha) {
+	public Usuario(String nome, String email, String senha) {
 		this.nome = nome;
-		this.cpf = cpf;
 		this.email = email;
 		this.senha = senha;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	@Override

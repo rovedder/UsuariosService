@@ -41,7 +41,7 @@ public class UsuarioService {
 			return ResponseEntity.status(HttpStatus.OK).body(usuario);
 		} catch(Exception ex) {
 			ex.getStackTrace();
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 	}
 
