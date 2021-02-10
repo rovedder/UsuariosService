@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ufsm.usuarios.UsuariosApplication;
+import br.ufsm.usuarios.controller.dto.UsuarioDTO;
 import br.ufsm.usuarios.form.UsuarioForm;
 import br.ufsm.usuarios.model.Usuario;
 import br.ufsm.usuarios.service.UsuarioService;
@@ -28,13 +29,13 @@ public class UsuarioController {
 	private UsuarioService service;
 
 	@PostMapping
-	public ResponseEntity<Usuario> CadastrarUsuario(@RequestBody @Valid UsuarioForm form) {
+	public ResponseEntity<UsuarioDTO> CadastrarUsuario(@RequestBody @Valid UsuarioForm form) {
 		logger.info("Cadastrando novo usuario: " + form.getEmail());
 		return service.CadastrarUsuario(form);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Usuario> ConsultarUsuario(@PathVariable Long id) {
+	public ResponseEntity<UsuarioDTO> ConsultarUsuario(@PathVariable Long id) {
 		logger.info("Consultando usuario com id: " + id);
 		return service.ConsultarUsuario(id);
 	}
