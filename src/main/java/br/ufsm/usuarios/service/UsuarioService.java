@@ -50,6 +50,7 @@ public class UsuarioService {
 		try {
 			Usuario usuario = usuariosRepository.findById(id).get(); 
 			UsuarioDTO response = new UsuarioDTO(usuario);
+			logger.info("Usuario encontrado: " + response.getId());
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} catch(Exception ex) {
 			ex.getStackTrace();
