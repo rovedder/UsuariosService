@@ -2,6 +2,7 @@ package br.ufsm.usuarios.service;
 
 import java.net.URI;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +17,11 @@ import br.ufsm.usuarios.controller.dto.UsuarioDTO;
 import br.ufsm.usuarios.form.UsuarioForm;
 import br.ufsm.usuarios.model.Usuario;
 import br.ufsm.usuarios.repository.UsuarioRepository;
-import jdk.internal.org.jline.utils.Log;
 
+@Slf4j
 @Service
 public class UsuarioService {
-	
-	private static Logger logger = LoggerFactory.getLogger(UsuariosApplication.class);
-	
+
 	@Autowired
 	private UsuarioRepository usuariosRepository;
 	
@@ -39,7 +38,7 @@ public class UsuarioService {
 		UriComponentsBuilder uriBuilder = UriComponentsBuilder.newInstance();
 		URI uri = uriBuilder.path("/usuario/{id}").buildAndExpand(usuarioNovo.getId()).toUri();
 		
-		logger.info("Usuario cadastrado com sucesso.");
+		log.info("Usuario cadastrado com sucesso.");
 		
 		UsuarioDTO response = new UsuarioDTO(usuarioNovo);
 		
@@ -50,7 +49,7 @@ public class UsuarioService {
 		try {
 			Usuario usuario = usuariosRepository.findById(id).get(); 
 			UsuarioDTO response = new UsuarioDTO(usuario);
-			logger.info("Usuario encontrado: " + response.getId());
+			log.info("Usuario encontrado: " + response.getId());
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 		} catch(Exception ex) {
 			ex.getStackTrace();
